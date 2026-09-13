@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "title": "Maizbhandari Mahfil",
+    "description": "Annual Maizbhandari event",
+    "date": "2026-09-20T20:00:00.000",
+    "icon": 58371,
+    "color": 4280391411
+  },
+  {
+    "id": "2",
+    "title": "Waz Mahfil",
+    "description": "Islamic discussion program",
+    "date": "2026-10-05T19:30:00.000",
+    "icon": 58734,
+    "color": 4283215696
+  }
+]
