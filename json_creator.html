@@ -77,6 +77,14 @@
       box-shadow: 0 0 0 3px rgba(0, 124, 41, 0.1);
     }
 
+    input:disabled,
+    select:disabled {
+      background: #eef0f2;
+      color: #888;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
     textarea {
       min-height: 100px;
       resize: vertical;
@@ -92,6 +100,10 @@
     .checkbox input {
       width: 18px;
       height: 18px;
+    }
+
+    .checkbox label {
+      margin: 0;
     }
 
     .actions {
@@ -242,11 +254,15 @@
 
 <div class="container">
 
+  <!-- HEADER -->
   <div class="card">
+
     <h1>Maizbhandari Calendar</h1>
+
     <p>Event JSON Generator</p>
 
     <div id="status" class="status"></div>
+
   </div>
 
 
@@ -274,110 +290,201 @@
 
       <div class="grid">
 
+        <!-- TITLE -->
         <div>
-          <label for="title">Title</label>
+
+          <label for="title">
+            Title
+          </label>
+
           <input
             type="text"
             id="title"
             placeholder="Event title"
             required
           >
+
         </div>
 
 
+        <!-- TYPE -->
         <div>
-          <label for="type">Type</label>
+
+          <label for="type">
+            Type
+          </label>
 
           <select id="type">
-            <option value="urs">Urs Sharif</option>
-            <option value="khoshroz">Khoshroz Sharif</option>
-            <option value="other">Other</option>
+
+            <option value="urs">
+              Urs Sharif
+            </option>
+
+            <option value="khoshroz">
+              Khoshroz Sharif
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
           </select>
+
         </div>
 
 
+        <!-- DESCRIPTION -->
         <div class="full">
-          <label for="description">Description</label>
+
+          <label for="description">
+            Description
+          </label>
 
           <textarea
             id="description"
             placeholder="Event description"
           ></textarea>
+
         </div>
 
 
+        <!-- DATE -->
         <div>
-          <label for="date">Date</label>
+
+          <label for="date">
+            Date
+          </label>
 
           <input
             type="date"
             id="date"
             required
           >
+
         </div>
 
 
+        <!-- LOCATION -->
         <div>
-          <label for="location">Location</label>
+
+          <label for="location">
+            Location
+          </label>
 
           <input
             type="text"
             id="location"
             placeholder="Event location"
           >
+
         </div>
 
 
+        <!-- FROM -->
         <div>
-          <label for="from">From</label>
+
+          <label for="from">
+            From
+          </label>
 
           <input
             type="date"
             id="from"
-            required
           >
+
         </div>
 
 
+        <!-- TO -->
         <div>
-          <label for="to">To</label>
+
+          <label for="to">
+            To
+          </label>
 
           <input
             type="date"
             id="to"
-            required
           >
+
         </div>
 
 
+        <!-- REPEAT -->
         <div>
-          <label for="repeat">Repeat</label>
+
+          <label for="repeat">
+            Repeat
+          </label>
 
           <select id="repeat">
-            <option value="none">None</option>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-            <option value="yearly">Yearly</option>
+
+            <option value="none">
+              None
+            </option>
+
+            <option value="daily">
+              Daily
+            </option>
+
+            <option value="weekly">
+              Weekly
+            </option>
+
+            <option value="monthly">
+              Monthly
+            </option>
+
+            <option value="yearly">
+              Yearly
+            </option>
+
           </select>
+
         </div>
 
 
+        <!-- REMINDER -->
         <div>
-          <label for="reminder">Reminder</label>
+
+          <label for="reminder">
+            Reminder
+          </label>
 
           <select id="reminder">
-            <option value="None">None</option>
-            <option value="5m">5 minutes</option>
-            <option value="15m">15 minutes</option>
-            <option value="30m">30 minutes</option>
-            <option value="1h">1 hour</option>
-            <option value="1d">1 day</option>
+
+            <option value="None">
+              None
+            </option>
+
+            <option value="5m">
+              5 minutes
+            </option>
+
+            <option value="15m">
+              15 minutes
+            </option>
+
+            <option value="30m">
+              30 minutes
+            </option>
+
+            <option value="1h">
+              1 hour
+            </option>
+
+            <option value="1d">
+              1 day
+            </option>
+
           </select>
+
         </div>
 
 
+        <!-- ALL DAY -->
         <div class="checkbox">
+
           <input
             type="checkbox"
             id="allDay"
@@ -386,11 +493,13 @@
           <label for="allDay">
             All Day Event
           </label>
+
         </div>
 
       </div>
 
 
+      <!-- ACTIONS -->
       <div class="actions">
 
         <button
@@ -468,11 +577,13 @@ let events = [];
 
 function showStatus(message, type) {
 
-  const status = document.getElementById("status");
+  const status =
+    document.getElementById("status");
 
   status.textContent = message;
 
-  status.className = "status " + type;
+  status.className =
+    "status " + type;
 
 }
 
@@ -490,22 +601,25 @@ async function loadEvents() {
 
   try {
 
-    const response = await fetch(
-      JSON_URL,
-      {
-        cache: "no-store"
-      }
-    );
+    const response =
+      await fetch(
+        JSON_URL,
+        {
+          cache: "no-store"
+        }
+      );
 
     if (!response.ok) {
 
       throw new Error(
-        "HTTP error: " + response.status
+        "HTTP error: " +
+        response.status
       );
 
     }
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
     if (!Array.isArray(data)) {
 
@@ -526,7 +640,9 @@ async function loadEvents() {
       "success"
     );
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(error);
 
@@ -541,6 +657,7 @@ async function loadEvents() {
     displayExistingEvents();
 
     updateJSON();
+
   }
 
 }
@@ -553,17 +670,23 @@ async function loadEvents() {
 function displayExistingEvents() {
 
   const container =
-    document.getElementById("existingEvents");
+    document.getElementById(
+      "existingEvents"
+    );
 
   const count =
-    document.getElementById("eventCount");
+    document.getElementById(
+      "eventCount"
+    );
 
 
   count.textContent =
     events.length +
-    (events.length === 1
-      ? " event"
-      : " events");
+    (
+      events.length === 1
+        ? " event"
+        : " events"
+    );
 
 
   container.innerHTML = "";
@@ -572,9 +695,12 @@ function displayExistingEvents() {
   if (events.length === 0) {
 
     container.innerHTML =
-      "<div class='event-item'>No events found.</div>";
+      "<div class='event-item'>" +
+      "No events found." +
+      "</div>";
 
     return;
+
   }
 
 
@@ -583,22 +709,26 @@ function displayExistingEvents() {
     const item =
       document.createElement("div");
 
-    item.className = "event-item";
+    item.className =
+      "event-item";
 
 
     const title =
       document.createElement("div");
 
-    title.className = "event-title";
+    title.className =
+      "event-title";
 
     title.textContent =
-      event.title || "Untitled Event";
+      event.title ||
+      "Untitled Event";
 
 
     const meta =
       document.createElement("div");
 
-    meta.className = "event-meta";
+    meta.className =
+      "event-meta";
 
     meta.textContent =
       "ID: " +
@@ -624,11 +754,16 @@ function displayExistingEvents() {
 
 function generateNextId() {
 
-  const numericIds = events
+  const numericIds =
+    events
 
-    .map(event => Number(event.id))
+      .map(
+        event => Number(event.id)
+      )
 
-    .filter(id => Number.isFinite(id));
+      .filter(
+        id => Number.isFinite(id)
+      );
 
 
   if (numericIds.length === 0) {
@@ -642,7 +777,9 @@ function generateNextId() {
     Math.max(...numericIds);
 
 
-  return String(maxId + 1);
+  return String(
+    maxId + 1
+  );
 
 }
 
@@ -666,14 +803,70 @@ function toMidnightISO(value) {
     Always create:
 
     YYYY-MM-DDT00:00:00.000Z
-
-    The UTC form is used so the time
-    remains exactly 00:00:00.000.
   */
 
-  return value + "T00:00:00.000Z";
+  return value +
+    "T00:00:00.000Z";
 
 }
+
+
+// --------------------------------------------------
+// TYPE -> ENABLE / DISABLE FROM & TO
+// --------------------------------------------------
+
+function updateDateFields() {
+
+  const type =
+    document.getElementById(
+      "type"
+    ).value;
+
+
+  const fromInput =
+    document.getElementById(
+      "from"
+    );
+
+  const toInput =
+    document.getElementById(
+      "to"
+    );
+
+
+  const disableDates =
+    type === "urs" ||
+    type === "khoshroz";
+
+
+  fromInput.disabled =
+    disableDates;
+
+  toInput.disabled =
+    disableDates;
+
+
+  if (disableDates) {
+
+    fromInput.value = "";
+
+    toInput.value = "";
+
+  }
+
+}
+
+
+// --------------------------------------------------
+// TYPE CHANGE LISTENER
+// --------------------------------------------------
+
+document
+  .getElementById("type")
+  .addEventListener(
+    "change",
+    updateDateFields
+  );
 
 
 // --------------------------------------------------
@@ -758,6 +951,10 @@ document
             .value;
 
 
+        // ------------------------------------------
+        // VALIDATION
+        // ------------------------------------------
+
         if (!title) {
 
           alert(
@@ -765,6 +962,7 @@ document
           );
 
           return;
+
         }
 
 
@@ -775,28 +973,32 @@ document
           );
 
           return;
+
         }
 
 
-        if (!fromValue) {
+        /*
+          From and To are required only
+          when Type = Other.
+        */
+
+        if (
+          type === "other" &&
+          (!fromValue || !toValue)
+        ) {
 
           alert(
-            "Please select the start date."
+            "Please select the start and end dates."
           );
 
           return;
+
         }
 
 
-        if (!toValue) {
-
-          alert(
-            "Please select the end date."
-          );
-
-          return;
-        }
-
+        // ------------------------------------------
+        // CREATE EVENT
+        // ------------------------------------------
 
         const newEvent = {
 
@@ -818,13 +1020,26 @@ document
 
           allDay: allDay,
 
-          from: toMidnightISO(
-            fromValue
-          ),
+          /*
+            Urs / Khoshroz:
+            from = ""
+            to = ""
 
-          to: toMidnightISO(
-            toValue
-          ),
+            Other:
+            actual ISO dates
+          */
+
+          from: fromValue
+            ? toMidnightISO(
+                fromValue
+              )
+            : "",
+
+          to: toValue
+            ? toMidnightISO(
+                toValue
+              )
+            : "",
 
           repeat: repeat,
 
@@ -835,12 +1050,18 @@ document
         };
 
 
-        // Add to existing array
+        // ------------------------------------------
+        // ADD EVENT
+        // ------------------------------------------
 
-        events.push(newEvent);
+        events.push(
+          newEvent
+        );
 
 
-        // Update UI
+        // ------------------------------------------
+        // UPDATE UI
+        // ------------------------------------------
 
         displayExistingEvents();
 
@@ -855,10 +1076,14 @@ document
         );
 
 
-        // Scroll to JSON
+        // ------------------------------------------
+        // SCROLL TO JSON
+        // ------------------------------------------
 
         document
-          .getElementById("jsonOutput")
+          .getElementById(
+            "jsonOutput"
+          )
           .scrollIntoView({
             behavior: "smooth",
             block: "center"
@@ -888,7 +1113,9 @@ document
 function updateJSON() {
 
   const output =
-    document.getElementById("jsonOutput");
+    document.getElementById(
+      "jsonOutput"
+    );
 
 
   output.textContent =
@@ -904,13 +1131,19 @@ function updateJSON() {
 
 
   document
-    .getElementById("copyButton")
-    .disabled = !hasData;
+    .getElementById(
+      "copyButton"
+    )
+    .disabled =
+      !hasData;
 
 
   document
-    .getElementById("downloadButton")
-    .disabled = !hasData;
+    .getElementById(
+      "downloadButton"
+    )
+    .disabled =
+      !hasData;
 
 }
 
@@ -931,9 +1164,11 @@ async function copyJSON() {
 
   try {
 
-    await navigator.clipboard.writeText(
-      json
-    );
+    await navigator
+      .clipboard
+      .writeText(
+        json
+      );
 
 
     showStatus(
@@ -962,7 +1197,6 @@ async function copyJSON() {
         original;
 
     }, 1500);
-
 
   }
 
@@ -998,33 +1232,49 @@ function downloadJSON() {
     new Blob(
       [json],
       {
-        type: "application/json"
+        type:
+          "application/json"
       }
     );
 
 
   const url =
-    URL.createObjectURL(blob);
+    URL.createObjectURL(
+      blob
+    );
 
 
   const link =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
 
 
-  link.href = url;
+  link.href =
+    url;
 
   link.download =
     "event.json";
 
 
-  document.body.appendChild(link);
+  document
+    .body
+    .appendChild(
+      link
+    );
 
   link.click();
 
-  document.body.removeChild(link);
+  document
+    .body
+    .removeChild(
+      link
+    );
 
 
-  URL.revokeObjectURL(url);
+  URL.revokeObjectURL(
+    url
+  );
 
 
   showStatus(
@@ -1042,10 +1292,27 @@ function downloadJSON() {
 function resetForm() {
 
   document
-    .getElementById("eventForm")
+    .getElementById(
+      "eventForm"
+    )
     .reset();
 
+
+  /*
+    Re-apply the correct
+    From / To disabled state.
+  */
+
+  updateDateFields();
+
 }
+
+
+// --------------------------------------------------
+// INITIAL DATE FIELD STATE
+// --------------------------------------------------
+
+updateDateFields();
 
 
 // --------------------------------------------------
