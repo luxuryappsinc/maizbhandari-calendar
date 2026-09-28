@@ -310,7 +310,7 @@
           <label for="date">Date</label>
 
           <input
-            type="datetime-local"
+            type="date"
             id="date"
             required
           >
@@ -332,7 +332,7 @@
           <label for="from">From</label>
 
           <input
-            type="datetime-local"
+            type="date"
             id="from"
             required
           >
@@ -343,7 +343,7 @@
           <label for="to">To</label>
 
           <input
-            type="datetime-local"
+            type="date"
             id="to"
             required
           >
@@ -374,18 +374,6 @@
             <option value="1h">1 hour</option>
             <option value="1d">1 day</option>
           </select>
-        </div>
-
-
-        <div class="checkbox">
-          <input
-            type="checkbox"
-            id="isBuiltin"
-          >
-
-          <label for="isBuiltin">
-            Built-in Event
-          </label>
         </div>
 
 
@@ -660,29 +648,30 @@ function generateNextId() {
 
 
 // --------------------------------------------------
-// DATETIME -> ISO
+// DATE -> MIDNIGHT ISO
 // --------------------------------------------------
 
-function toISO(value) {
+function toMidnightISO(value) {
 
   if (!value) {
-    return new Date().toISOString();
-  }
-
-
-  const date = new Date(value);
-
-
-  if (Number.isNaN(date.getTime())) {
 
     throw new Error(
-      "Invalid date: " + value
+      "Invalid date."
     );
 
   }
 
 
-  return date.toISOString();
+  /*
+    Always create:
+
+    YYYY-MM-DDT00:00:00.000Z
+
+    The UTC form is used so the time
+    remains exactly 00:00:00.000.
+  */
+
+  return value + "T00:00:00.000Z";
 
 }
 
@@ -732,12 +721,6 @@ document
             .value;
 
 
-        const isBuiltin =
-          document
-            .getElementById("isBuiltin")
-            .checked;
-
-
         const location =
           document
             .getElementById("location")
@@ -777,7 +760,9 @@ document
 
         if (!title) {
 
-          alert("Please enter an event title.");
+          alert(
+            "Please enter an event title."
+          );
 
           return;
         }
@@ -785,7 +770,9 @@ document
 
         if (!dateValue) {
 
-          alert("Please select the event date.");
+          alert(
+            "Please select the event date."
+          );
 
           return;
         }
@@ -793,7 +780,9 @@ document
 
         if (!fromValue) {
 
-          alert("Please select the start time.");
+          alert(
+            "Please select the start date."
+          );
 
           return;
         }
@@ -801,7 +790,9 @@ document
 
         if (!toValue) {
 
-          alert("Please select the end time.");
+          alert(
+            "Please select the end date."
+          );
 
           return;
         }
@@ -815,19 +806,25 @@ document
 
           description: description,
 
-          date: toISO(dateValue),
+          date: toMidnightISO(
+            dateValue
+          ),
 
           type: type,
 
-          isBuiltin: isBuiltin,
+          isBuiltin: true,
 
           location: location,
 
           allDay: allDay,
 
-          from: toISO(fromValue),
+          from: toMidnightISO(
+            fromValue
+          ),
 
-          to: toISO(toValue),
+          to: toMidnightISO(
+            toValue
+          ),
 
           repeat: repeat,
 
