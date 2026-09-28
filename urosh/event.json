@@ -13,22 +13,5 @@
     "repeat": "yearly",
     "reminder": "1d",
     "image": "https://maizbhandari-calendar.pages.dev/images/img_1.jpeg"
-  },
-  [
-  {
-    "id": "4",
-    "title": "বিশ্বঅলি শাহানশাহ হযরত সৈয়দ জিয়াউল হক মাইজভাণ্ডারী (ক.) পবিত্র ওরশ শরিফ",
-    "description": "বিশ্বঅলি শাহানশাহ হযরত সৈয়দ জিয়াউল হক মাইজভাণ্ডারী (ক.) পবিত্র ওরশ শরিফ",
-    "date": "2026-10-11T00:00:00.000Z",
-    "type": "urs",
-    "isBuiltin": true,
-    "location": "",
-    "allDay": true,
-    "from": "2026-10-11T00:00:00.000Z",
-    "to": "2026-10-11T00:00:00.000Z",
-    "repeat": "yearly",
-    "reminder": "1d",
-    "image": "https://maizbhandari-calendar.pages.dev/images/img_1.jpeg"
   }
-]
 ]
