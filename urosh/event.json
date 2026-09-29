@@ -9,7 +9,7 @@
     "location": "",
     "allDay": true,
     "from": "2026-10-11T00:00:00.000",
-    "to": "2026-10-11T00:00:00.000Z",
+    "to": "2026-10-11T00:00:00.000",
     "repeat": "Yearly",
     "reminder": "1d",
     "image": "https://maizbhandari-calendar.pages.dev/images/img_1.jpeg"
