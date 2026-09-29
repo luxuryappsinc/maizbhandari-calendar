@@ -13,5 +13,20 @@
     "repeat": "Yearly",
     "reminder": "1d",
     "image": "https://maizbhandari-calendar.pages.dev/images/img_1.jpeg"
+  },
+  {
+    "id": "1790627758453",
+    "title": "jjj",
+    "description": "",
+    "date": "2026-09-29T00:00:00.000",
+    "type": "my_events",
+    "isBuiltin": false,
+    "location": "",
+    "allDay": false,
+    "from": "2026-09-29T00:00:00.000",
+    "to": "2026-09-29T01:00:00.000",
+    "repeat": "Yearly",
+    "reminder": "None",
+    "image": ""
   }
 ]
