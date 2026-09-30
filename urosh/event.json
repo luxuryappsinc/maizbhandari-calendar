@@ -7,8 +7,8 @@
     "isBuiltin": true,
     "location": "নানুবাজার, ফটিকছড়ি, চট্টগ্রাম।",
     "allDay": true,
-    "from": "2026-10-11T00:00:00.000",
-    "to": "2026-10-11T23:59:59.000",
+    "from": "2026-01-04T00:00:00.000",
+    "to": "2026-01-04T23:59:59.000",
     "repeat": "Yearly",
     "reminder": "At time of event",
     "image": ""
