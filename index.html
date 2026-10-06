@@ -1,1 +1,2947 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#007c29">
+
+  <title>Maizbhandari Calendar — Islamic Events & Calendar</title>
+
+  <meta name="description"
+        content="Maizbhandari Calendar is a simple and beautiful calendar app for keeping track of Maizbhandari Urosh Sharif, Khoshroj Sharif and personal events.">
+
+  <meta name="keywords"
+        content="Maizbhandari Calendar, Maizbhandari, Urosh Sharif, Khoshroj Sharif, Islamic Calendar, Islamic Events, Maizbhandari Calendar App">
+
+  <meta name="author" content="Luxury Applications">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Maizbhandari Calendar">
+  <meta property="og:description"
+        content="Keep your Maizbhandari special days, Urosh Sharif, Khoshroj Sharif and personal events organized in one beautiful calendar.">
+  <meta property="og:url" content="https://maizbhandari-calendar.pages.dev/">
+  <meta property="og:image"
+        content="https://maizbhandari-calendar.pages.dev/assets/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Maizbhandari Calendar">
+  <meta name="twitter:description"
+        content="A beautiful calendar for Maizbhandari special days and personal events.">
+  <meta name="twitter:image"
+        content="https://maizbhandari-calendar.pages.dev/assets/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon"
+        type="image/png"
+        href="assets/icon.png">
+
+  <!--
+    No external CSS framework is used.
+    The entire design is contained in this file.
+  -->
+
+  <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      background: #f7faf8;
+      color: #132018;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
+    :root {
+      --primary: #007c29;
+      --primary-dark: #00591e;
+      --primary-light: #e8f6ed;
+
+      --gold: #c99a28;
+      --gold-light: #f7edca;
+
+      --dark: #0d2115;
+      --text: #27352c;
+      --muted: #68756d;
+
+      --white: #ffffff;
+      --surface: #ffffff;
+      --surface-2: #f2f7f3;
+
+      --border: rgba(0, 70, 25, 0.10);
+
+      --shadow-sm:
+        0 8px 25px rgba(0, 55, 25, 0.06);
+
+      --shadow:
+        0 18px 50px rgba(0, 55, 25, 0.10);
+
+      --shadow-lg:
+        0 30px 80px rgba(0, 55, 25, 0.16);
+
+      --radius-sm: 12px;
+      --radius: 20px;
+      --radius-lg: 30px;
+
+      --container: 1180px;
+    }
+
+    /* =========================================================
+       UTILITY
+    ========================================================= */
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 110px 0;
+      position: relative;
+    }
+
+    .section-header {
+      max-width: 700px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      color: var(--primary);
+      background: var(--primary-light);
+
+      padding: 7px 14px;
+      border-radius: 999px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      letter-spacing: .04em;
+      text-transform: uppercase;
+
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "✦";
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+      margin-bottom: 18px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 650px;
+      margin-inline: auto;
+    }
+
+    /* =========================================================
+       BACKGROUND PATTERN
+    ========================================================= */
+
+    .pattern {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+
+      background-image:
+        linear-gradient(30deg, #007c29 12%, transparent 12.5%, transparent 87%, #007c29 87.5%, #007c29),
+        linear-gradient(150deg, #007c29 12%, transparent 12.5%, transparent 87%, #007c29 87.5%, #007c29),
+        linear-gradient(30deg, #007c29 12%, transparent 12.5%, transparent 87%, #007c29 87.5%, #007c29),
+        linear-gradient(150deg, #007c29 12%, transparent 12.5%, transparent 87%, #007c29 87.5%, #007c29),
+        linear-gradient(60deg, #007c29 25%, transparent 25.5%, transparent 75%, #007c29 75%);
+      
+      background-size: 80px 140px;
+      background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0;
+    }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+
+      transition:
+        background .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(255, 255, 255, .92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06);
+    }
+
+    .nav {
+      height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      font-weight: 800;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+
+      object-fit: contain;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 5px 18px rgba(0, 124, 41, .18);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-name {
+      font-size: 16px;
+    }
+
+    .brand-company {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+
+      color: #435148;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--primary);
+      color: white;
+
+      padding: 11px 18px;
+      border-radius: 999px;
+
+      font-size: 13px;
+      font-weight: 700;
+
+      box-shadow: 0 8px 20px rgba(0,124,41,.18);
+
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+    .nav-download:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+
+      display: none;
+
+      border: 1px solid var(--border);
+      background: white;
+
+      border-radius: 12px;
+
+      cursor: pointer;
+
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 10px;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      position: relative;
+      min-height: 850px;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      padding-top: 100px;
+
+      background:
+        radial-gradient(
+          circle at 85% 25%,
+          rgba(0,124,41,.13),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 10% 80%,
+          rgba(201,154,40,.10),
+          transparent 28%
+        ),
+        linear-gradient(
+          135deg,
+          #f8fcf9 0%,
+          #eff8f1 100%
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+
+      align-items: center;
+
+      gap: 70px;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(0,124,41,.12);
+
+      padding: 8px 14px;
+      border-radius: 999px;
+
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+
+      box-shadow: var(--shadow-sm);
+
+      margin-bottom: 22px;
+    }
+
+    .hero-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 5px rgba(201,154,40,.12);
+    }
+
+    .hero h1 {
+      color: var(--dark);
+
+      font-size: clamp(46px, 6vw, 76px);
+      line-height: .98;
+
+      letter-spacing: -.055em;
+
+      margin-bottom: 26px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+      position: relative;
+    }
+
+    .hero h1 span::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+
+      width: 100%;
+      height: 7px;
+
+      background: var(--gold-light);
+
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .hero-description {
+      color: var(--muted);
+
+      font-size: 18px;
+      line-height: 1.75;
+
+      max-width: 590px;
+
+      margin-bottom: 32px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-bottom: 35px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      min-height: 52px;
+
+      padding: 0 20px;
+
+      border-radius: 14px;
+
+      font-size: 14px;
+      font-weight: 750;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: white;
+      background: var(--primary);
+
+      box-shadow:
+        0 12px 28px rgba(0,124,41,.22);
+    }
+
+    .button-primary:hover {
+      background: var(--primary-dark);
+      box-shadow:
+        0 15px 32px rgba(0,124,41,.28);
+    }
+
+    .button-secondary {
+      color: var(--dark);
+      background: white;
+      border: 1px solid var(--border);
+
+      box-shadow: var(--shadow-sm);
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(0,124,41,.25);
+    }
+
+    .button-icon {
+      font-size: 19px;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .trust-icon {
+      width: 35px;
+      height: 35px;
+
+      display: grid;
+      place-items: center;
+
+      background: var(--gold-light);
+      color: var(--gold);
+
+      border-radius: 50%;
+    }
+
+    /* =========================================================
+       PHONE MOCKUP
+    ========================================================= */
+
+    .hero-visual {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 580px;
+    }
+
+    .glow {
+      position: absolute;
+
+      width: 430px;
+      height: 430px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(0,124,41,.18),
+          rgba(0,124,41,.04) 55%,
+          transparent 70%
+        );
+
+      filter: blur(2px);
+    }
+
+    .ornament {
+      position: absolute;
+
+      width: 480px;
+      height: 480px;
+
+      border: 1px solid rgba(0,124,41,.12);
+      border-radius: 50%;
+    }
+
+    .ornament::before,
+    .ornament::after {
+      content: "";
+
+      position: absolute;
+      inset: 35px;
+
+      border: 1px dashed rgba(201,154,40,.25);
+      border-radius: 50%;
+    }
+
+    .ornament::after {
+      inset: 80px;
+      border-style: solid;
+      opacity: .5;
+    }
+
+    .phone {
+      position: relative;
+      z-index: 2;
+
+      width: 280px;
+      height: 565px;
+
+      padding: 9px;
+
+      background: #101512;
+
+      border-radius: 42px;
+
+      box-shadow:
+        0 45px 80px rgba(0, 40, 20, .28),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+
+      transform: rotate(2deg);
+
+      animation: floatPhone 6s ease-in-out infinite;
+    }
+
+    @keyframes floatPhone {
+      0%, 100% {
+        transform: translateY(0) rotate(2deg);
+      }
+
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    .phone::before {
+      content: "";
+
+      position: absolute;
+
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 88px;
+      height: 25px;
+
+      background: #101512;
+
+      border-radius: 0 0 18px 18px;
+
+      z-index: 5;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+
+      border-radius: 34px;
+
+      background: white;
+
+      position: relative;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .phone-placeholder {
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+
+      background:
+        linear-gradient(
+          160deg,
+          #eff9f2,
+          #ffffff 45%,
+          #eaf5ee
+        );
+    }
+
+    .mock-header {
+      background: var(--primary);
+      color: white;
+
+      padding: 55px 20px 22px;
+    }
+
+    .mock-header small {
+      opacity: .75;
+      font-size: 10px;
+    }
+
+    .mock-header h3 {
+      font-size: 22px;
+      margin-top: 5px;
+    }
+
+    .mock-calendar {
+      padding: 18px 15px;
+    }
+
+    .mock-month {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+    }
+
+    .mock-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+
+      text-align: center;
+
+      font-size: 9px;
+      color: #87948b;
+      margin-bottom: 7px;
+    }
+
+    .mock-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+
+    .mock-day {
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 9px;
+
+      font-size: 10px;
+      color: #4e5b52;
+    }
+
+    .mock-day.active {
+      background: var(--primary);
+      color: white;
+      font-weight: 800;
+    }
+
+    .mock-day.event {
+      position: relative;
+    }
+
+    .mock-day.event::after {
+      content: "";
+
+      position: absolute;
+      bottom: 4px;
+
+      width: 3px;
+      height: 3px;
+
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    .mock-event {
+      margin: 10px 15px;
+
+      padding: 13px;
+
+      background: white;
+
+      border: 1px solid #e2ebe4;
+
+      border-radius: 13px;
+
+      box-shadow: 0 5px 15px rgba(0,0,0,.04);
+    }
+
+    .mock-event-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .mock-event-date {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* =========================================================
+       FEATURES
+    ========================================================= */
+
+    .features {
+      background: white;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      position: relative;
+
+      padding: 30px;
+
+      background: white;
+
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow-sm);
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-7px);
+
+      border-color: rgba(0,124,41,.16);
+
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      width: 55px;
+      height: 55px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 16px;
+
+      background: var(--primary-light);
+
+      color: var(--primary);
+
+      font-size: 25px;
+
+      margin-bottom: 22px;
+    }
+
+    .feature-card:nth-child(2) .feature-icon,
+    .feature-card:nth-child(5) .feature-icon {
+      background: var(--gold-light);
+      color: var(--gold);
+    }
+
+    .feature-card h3 {
+      color: var(--dark);
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    /* =========================================================
+       CATEGORIES
+    ========================================================= */
+
+    .categories {
+      background: var(--surface-2);
+      overflow: hidden;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .category-card {
+      min-height: 220px;
+
+      position: relative;
+      overflow: hidden;
+
+      padding: 25px;
+
+      border-radius: 22px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          145deg,
+          #006b24,
+          #009b36
+        );
+
+      box-shadow: var(--shadow);
+
+      transition: transform .25s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-7px);
+    }
+
+    .category-card:nth-child(2) {
+      background:
+        linear-gradient(
+          145deg,
+          #876414,
+          #c99a28
+        );
+    }
+
+    .category-card:nth-child(3) {
+      background:
+        linear-gradient(
+          145deg,
+          #135c47,
+          #25896e
+        );
+    }
+
+    .category-card:nth-child(4) {
+      background:
+        linear-gradient(
+          145deg,
+          #3d4d42,
+          #63766a
+        );
+    }
+
+    .category-pattern {
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      right: -55px;
+      top: -55px;
+
+      border: 1px solid rgba(255,255,255,.18);
+
+      transform: rotate(45deg);
+
+      box-shadow:
+        0 0 0 25px rgba(255,255,255,.025),
+        0 0 0 50px rgba(255,255,255,.025);
+    }
+
+    .category-icon {
+      position: absolute;
+
+      top: 25px;
+      left: 25px;
+
+      font-size: 30px;
+
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      background: rgba(255,255,255,.13);
+
+      backdrop-filter: blur(10px);
+    }
+
+    .category-card h3 {
+      position: relative;
+
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .category-card p {
+      position: relative;
+
+      color: rgba(255,255,255,.78);
+
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       SCREENSHOTS
+    ========================================================= */
+
+    .screenshots {
+      background: white;
+    }
+
+    .screenshots-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 28px;
+
+      align-items: center;
+    }
+
+    .screenshot {
+      position: relative;
+
+      background: #f1f6f2;
+
+      border: 1px solid var(--border);
+
+      border-radius: 30px;
+
+      padding: 12px;
+
+      box-shadow: var(--shadow);
+
+      overflow: hidden;
+
+      transition: transform .3s ease;
+    }
+
+    .screenshot:hover {
+      transform: translateY(-9px);
+    }
+
+    .screenshot:nth-child(2) {
+      transform: translateY(-25px);
+    }
+
+    .screenshot:nth-child(2):hover {
+      transform: translateY(-34px);
+    }
+
+    .screenshot img {
+      width: 100%;
+
+      aspect-ratio: 9 / 16;
+
+      object-fit: cover;
+
+      border-radius: 22px;
+
+      background: #dfeae2;
+    }
+
+    .screenshot-placeholder {
+      aspect-ratio: 9 / 16;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          160deg,
+          #eff9f2,
+          #ffffff
+        );
+
+      color: var(--muted);
+    }
+
+    .screenshot-placeholder strong {
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about {
+      background: var(--surface-2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+
+      align-items: center;
+
+      gap: 80px;
+    }
+
+    .about-art {
+      position: relative;
+
+      min-height: 420px;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .about-circle {
+      width: 330px;
+      height: 330px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 35% 30%,
+          white,
+          #e0f2e5
+        );
+
+      border: 1px solid rgba(0,124,41,.12);
+
+      display: grid;
+      place-items: center;
+
+      box-shadow: var(--shadow);
+
+      position: relative;
+    }
+
+    .about-symbol {
+      font-size: 100px;
+      color: var(--primary);
+
+      filter:
+        drop-shadow(
+          0 15px 20px rgba(0,124,41,.12)
+        );
+    }
+
+    .floating-card {
+      position: absolute;
+
+      background: white;
+
+      border: 1px solid var(--border);
+
+      border-radius: 17px;
+
+      padding: 15px 18px;
+
+      box-shadow: var(--shadow);
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      animation: floatCard 5s ease-in-out infinite;
+    }
+
+    .floating-card.one {
+      top: 45px;
+      right: 5px;
+    }
+
+    .floating-card.two {
+      bottom: 50px;
+      left: 0;
+
+      animation-delay: -2s;
+    }
+
+    .floating-icon {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .about-copy h2 {
+      font-size: clamp(34px, 4vw, 50px);
+
+      line-height: 1.08;
+
+      letter-spacing: -.04em;
+
+      color: var(--dark);
+
+      margin-bottom: 20px;
+    }
+
+    .about-copy > p {
+      color: var(--muted);
+
+      font-size: 16px;
+      line-height: 1.8;
+
+      margin-bottom: 28px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+
+      color: #405047;
+
+      font-size: 14px;
+    }
+
+    .check {
+      flex: 0 0 auto;
+
+      width: 23px;
+      height: 23px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: var(--primary-light);
+      color: var(--primary);
+
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       DOWNLOAD
+    ========================================================= */
+
+    .download {
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          #005d20,
+          #008a2d
+        );
+
+      color: white;
+    }
+
+    .download .pattern {
+      opacity: .07;
+      filter: brightness(0) invert(1);
+    }
+
+    .download-content {
+      position: relative;
+      z-index: 2;
+
+      text-align: center;
+
+      max-width: 760px;
+
+      margin-inline: auto;
+    }
+
+    .download h2 {
+      font-size: clamp(36px, 5vw, 58px);
+
+      line-height: 1.05;
+
+      letter-spacing: -.04em;
+
+      margin-bottom: 20px;
+    }
+
+    .download p {
+      color: rgba(255,255,255,.76);
+
+      max-width: 620px;
+
+      margin: 0 auto 30px;
+
+      font-size: 16px;
+    }
+
+    .store-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      gap: 13px;
+    }
+
+    .store-button {
+      min-width: 190px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 12px 17px;
+
+      color: var(--dark);
+
+      background: white;
+
+      border-radius: 14px;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .store-button:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,.18);
+    }
+
+    .store-icon {
+      font-size: 27px;
+    }
+
+    .store-label {
+      display: flex;
+      flex-direction: column;
+
+      align-items: flex-start;
+
+      line-height: 1.1;
+    }
+
+    .store-label small {
+      color: #6d776f;
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .store-label strong {
+      font-size: 16px;
+      margin-top: 4px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      background: #07150c;
+      color: white;
+      padding: 65px 0 25px;
+    }
+
+    .footer-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.5fr 1fr 1fr 1fr;
+
+      gap: 50px;
+
+      padding-bottom: 50px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+    }
+
+    .footer-brand {
+      max-width: 330px;
+    }
+
+    .footer-brand .brand {
+      color: white;
+      margin-bottom: 18px;
+    }
+
+    .footer-brand .brand-company {
+      color: rgba(255,255,255,.5);
+    }
+
+    .footer-description {
+      color: rgba(255,255,255,.55);
+
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-column h4 {
+      font-size: 13px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .08em;
+
+      color: white;
+
+      margin-bottom: 18px;
+    }
+
+    .footer-column a {
+      display: block;
+
+      color: rgba(255,255,255,.55);
+
+      font-size: 13px;
+
+      margin-bottom: 11px;
+
+      transition: color .2s ease;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+
+      color: rgba(255,255,255,.4);
+
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       REVEAL ANIMATION
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(25px);
+
+      transition:
+        opacity .7s ease,
+        transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 980px) {
+
+      .hero {
+        min-height: auto;
+        padding-top: 140px;
+        padding-bottom: 90px;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-copy {
+        margin-inline: auto;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .hero-actions,
+      .hero-trust {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 570px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-art {
+        order: 2;
+      }
+
+      .about-copy {
+        text-align: center;
+      }
+
+      .check-list {
+        max-width: 500px;
+        margin-inline: auto;
+        text-align: left;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(
+          var(--container),
+          calc(100% - 28px)
+        );
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .nav {
+        height: 70px;
+      }
+
+      .nav-links {
+        position: absolute;
+
+        top: 70px;
+        left: 14px;
+        right: 14px;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 4px;
+
+        padding: 12px;
+
+        background: rgba(255,255,255,.97);
+
+        backdrop-filter: blur(18px);
+
+        border: 1px solid var(--border);
+
+        border-radius: 18px;
+
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 12px 14px;
+
+        border-radius: 10px;
+      }
+
+      .nav-links a:hover {
+        background: var(--primary-light);
+      }
+
+      .nav-download {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .brand-name {
+        font-size: 14px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 13vw, 62px);
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .hero-visual {
+        min-height: 530px;
+      }
+
+      .phone {
+        width: 250px;
+        height: 510px;
+      }
+
+      .ornament {
+        width: 390px;
+        height: 390px;
+      }
+
+      .glow {
+        width: 370px;
+        height: 370px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .screenshots-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 310px;
+
+        margin-inline: auto;
+      }
+
+      .screenshot:nth-child(2) {
+        transform: none;
+      }
+
+      .screenshot:nth-child(2):hover {
+        transform: translateY(-9px);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 35px 25px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .store-buttons {
+        flex-direction: column;
+      }
+
+      .store-button {
+        width: 100%;
+        max-width: 280px;
+        margin-inline: auto;
+      }
+
+      .about-circle {
+        width: 270px;
+        height: 270px;
+      }
+
+      .floating-card.one {
+        right: -5px;
+      }
+
+      .floating-card.two {
+        left: -5px;
+      }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
+
+  <header class="site-header" id="siteHeader">
+
+    <div class="container">
+
+      <nav class="nav">
+
+        <a href="#home" class="brand">
+
+          <img
+            src="assets/icon.png"
+            alt="Maizbhandari Calendar icon"
+            class="brand-logo"
+          >
+
+          <span class="brand-text">
+            <span class="brand-name">
+              Maizbhandari Calendar
+            </span>
+
+            <span class="brand-company">
+              by Luxury Applications
+            </span>
+          </span>
+
+        </a>
+
+        <div class="nav-links" id="navLinks">
+
+          <a href="#features">
+            Features
+          </a>
+
+          <a href="#events">
+            Events
+          </a>
+
+          <a href="#screenshots">
+            Screenshots
+          </a>
+
+          <a href="#about">
+            About
+          </a>
+
+          <a href="#download">
+            Download
+          </a>
+
+        </div>
+
+        <a
+          href="#download"
+          class="nav-download">
+          Get the App
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Open navigation"
+          aria-expanded="false">
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </button>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
+
+  <main>
+
+    <section class="hero" id="home">
+
+      <div class="pattern"></div>
+
+      <div class="container">
+
+        <div class="hero-content">
+
+          <div class="hero-copy reveal">
+
+            <div class="hero-badge">
+
+              <span class="hero-badge-dot"></span>
+
+              Your special days, beautifully organized
+
+            </div>
+
+            <h1>
+              A calendar for
+              <span>meaningful days.</span>
+            </h1>
+
+            <p class="hero-description">
+
+              Maizbhandari Calendar helps you keep track of
+              Maizbhandari Urosh Sharif, Khoshroj Sharif,
+              important occasions and your own personal events —
+              all in one simple calendar.
+
+            </p>
+
+            <div class="hero-actions">
+
+              <a
+                href="#download"
+                class="button button-primary">
+
+                <span class="button-icon">↓</span>
+
+                Download the App
+
+              </a>
+
+              <a
+                href="#features"
+                class="button button-secondary">
+
+                Explore Features
+
+                <span>→</span>
+
+              </a>
+
+            </div>
+
+            <div class="hero-trust">
+
+              <span class="trust-icon">✦</span>
+
+              <span>
+                Designed with simplicity, accessibility
+                and a peaceful experience in mind.
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="hero-visual reveal">
+
+            <div class="glow"></div>
+
+            <div class="ornament"></div>
+
+            <div class="phone">
+
+              <div class="phone-screen">
+
+                <!--
+                  Replace this placeholder with an actual
+                  screenshot if desired:
+
+                  <img src="assets/screenshot-home.png"
+                       alt="Maizbhandari Calendar app">
+                -->
+
+                <div class="phone-placeholder">
+
+                  <div class="mock-header">
+
+                    <small>
+                      Maizbhandari Calendar
+                    </small>
+
+                    <h3>
+                      October 2026
+                    </h3>
+
+                  </div>
+
+                  <div class="mock-calendar">
+
+                    <div class="mock-month">
+
+                      <span>
+                        October
+                      </span>
+
+                      <span>
+                        2026
+                      </span>
+
+                    </div>
+
+                    <div class="mock-week">
+
+                      <span>S</span>
+                      <span>M</span>
+                      <span>T</span>
+                      <span>W</span>
+                      <span>T</span>
+                      <span>F</span>
+                      <span>S</span>
+
+                    </div>
+
+                    <div class="mock-days">
+
+                      <span class="mock-day">27</span>
+                      <span class="mock-day">28</span>
+                      <span class="mock-day">29</span>
+                      <span class="mock-day">30</span>
+                      <span class="mock-day">1</span>
+                      <span class="mock-day">2</span>
+                      <span class="mock-day">3</span>
+
+                      <span class="mock-day">4</span>
+                      <span class="mock-day">5</span>
+                      <span class="mock-day active">6</span>
+                      <span class="mock-day event">7</span>
+                      <span class="mock-day">8</span>
+                      <span class="mock-day">9</span>
+                      <span class="mock-day event">10</span>
+
+                      <span class="mock-day">11</span>
+                      <span class="mock-day">12</span>
+                      <span class="mock-day">13</span>
+                      <span class="mock-day">14</span>
+                      <span class="mock-day event">15</span>
+                      <span class="mock-day">16</span>
+                      <span class="mock-day">17</span>
+
+                      <span class="mock-day">18</span>
+                      <span class="mock-day">19</span>
+                      <span class="mock-day">20</span>
+                      <span class="mock-day">21</span>
+                      <span class="mock-day">22</span>
+                      <span class="mock-day event">23</span>
+                      <span class="mock-day">24</span>
+
+                      <span class="mock-day">25</span>
+                      <span class="mock-day">26</span>
+                      <span class="mock-day">27</span>
+                      <span class="mock-day">28</span>
+                      <span class="mock-day">29</span>
+                      <span class="mock-day">30</span>
+                      <span class="mock-day">31</span>
+
+                    </div>
+
+                  </div>
+
+                  <div class="mock-event">
+
+                    <div class="mock-event-title">
+                      Urosh Sharif
+                    </div>
+
+                    <div class="mock-event-date">
+                      Special day
+                    </div>
+
+                  </div>
+
+                  <div class="mock-event">
+
+                    <div class="mock-event-title">
+                      Khoshroj Sharif
+                    </div>
+
+                    <div class="mock-event-date">
+                      Annual event
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+    <section class="section features" id="features">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div class="eyebrow">
+            Features
+          </div>
+
+          <h2 class="section-title">
+            Everything you need in one calendar.
+          </h2>
+
+          <p class="section-description">
+            Built around the events and dates that matter,
+            with a clean interface that stays out of your way.
+          </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+          <article class="feature-card reveal">
+
+            <div class="feature-icon">
+              📅
+            </div>
+
+            <h3>
+              Special Days
+            </h3>
+
+            <p>
+              Keep important Maizbhandari dates visible
+              alongside your everyday calendar.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card reveal">
+
+            <div class="feature-icon">
+              ✦
+            </div>
+
+            <h3>
+              Urosh Sharif
+            </h3>
+
+            <p>
+              Easily discover and follow Urosh Sharif
+              dates throughout the year.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card reveal">
+
+            <div class="feature-icon">
+              ☾
+            </div>
+
+            <h3>
+              Khoshroj Sharif
+            </h3>
+
+            <p>
+              Keep Khoshroj Sharif dates organized
+              and easy to find.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card reveal">
+
+            <div class="feature-icon">
+              🔔
+            </div>
+
+            <h3>
+              Reminders
+            </h3>
+
+            <p>
+              Set reminders for events so meaningful
+              days don't quietly pass you by.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card reveal">
+
+            <div class="feature-icon">
+              ♡
+            </div>
+
+            <h3>
+              Favorites
+            </h3>
+
+            <p>
+              Save the dates and events you care about
+              for quick access.
+            </p>
+
+          </article>
+
+
+          <article class="feature-card reveal">
+
+            <div class="feature-icon">
+              🌙
+            </div>
+
+            <h3>
+              Islamic-Inspired Design
+            </h3>
+
+            <p>
+              A calm visual experience inspired by
+              Islamic geometric patterns and colors.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EVENT CATEGORIES
+    ====================================================== -->
+
+    <section class="section categories" id="events">
+
+      <div class="pattern"></div>
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div class="eyebrow">
+            Events
+          </div>
+
+          <h2 class="section-title">
+            Organize every kind of special day.
+          </h2>
+
+          <p class="section-description">
+            Browse built-in Maizbhandari events or create
+            your own personal reminders.
+          </p>
+
+        </div>
+
+
+        <div class="category-grid">
+
+          <article class="category-card reveal">
+
+            <div class="category-pattern"></div>
+
+            <div class="category-icon">
+              ✦
+            </div>
+
+            <h3>
+              Urosh
+            </h3>
+
+            <p>
+              Keep track of Urosh Sharif dates
+              throughout the calendar.
+            </p>
+
+          </article>
+
+
+          <article class="category-card reveal">
+
+            <div class="category-pattern"></div>
+
+            <div class="category-icon">
+              ☾
+            </div>
+
+            <h3>
+              Khoshroj
+            </h3>
+
+            <p>
+              Quickly find annual Khoshroj
+              Sharif occasions.
+            </p>
+
+          </article>
+
+
+          <article class="category-card reveal">
+
+            <div class="category-pattern"></div>
+
+            <div class="category-icon">
+              ✧
+            </div>
+
+            <h3>
+              Belayot
+            </h3>
+
+            <p>
+              Keep important Belayot-related
+              occasions close at hand.
+            </p>
+
+          </article>
+
+
+          <article class="category-card reveal">
+
+            <div class="category-pattern"></div>
+
+            <div class="category-icon">
+              +
+            </div>
+
+            <h3>
+              My Events
+            </h3>
+
+            <p>
+              Add birthdays, appointments and
+              your own personal occasions.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SCREENSHOTS
+    ====================================================== -->
+
+    <section class="section screenshots" id="screenshots">
+
+      <div class="container">
+
+        <div class="section-header reveal">
+
+          <div class="eyebrow">
+            App Preview
+          </div>
+
+          <h2 class="section-title">
+            Simple to understand. Easy to use.
+          </h2>
+
+          <p class="section-description">
+            A focused interface designed to make your
+            important dates easy to see at a glance.
+          </p>
+
+        </div>
+
+
+        <div class="screenshots-grid">
+
+          <div class="screenshot reveal">
+
+            <!--
+              Replace with:
+
+              assets/screenshot-home.png
+            -->
+
+            <div class="screenshot-placeholder">
+
+              <strong>
+                Home & Calendar
+              </strong>
+
+              <span>
+                Add your screenshot here
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="screenshot reveal">
+
+            <!--
+              Replace with:
+
+              assets/screenshot-events.png
+            -->
+
+            <div class="screenshot-placeholder">
+
+              <strong>
+                Events
+              </strong>
+
+              <span>
+                Add your screenshot here
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="screenshot reveal">
+
+            <!--
+              Replace with:
+
+              assets/screenshot-details.png
+            -->
+
+            <div class="screenshot-placeholder">
+
+              <strong>
+                Event Details
+              </strong>
+
+              <span>
+                Add your screenshot here
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
+
+    <section class="section about" id="about">
+
+      <div class="container">
+
+        <div class="about-grid">
+
+          <div class="about-art reveal">
+
+            <div class="about-circle">
+
+              <div class="about-symbol">
+                ☾
+              </div>
+
+            </div>
+
+            <div class="floating-card one">
+
+              <div class="floating-icon">
+                ✓
+              </div>
+
+              <span>
+                Events organized
+              </span>
+
+            </div>
+
+            <div class="floating-card two">
+
+              <div class="floating-icon">
+                ✦
+              </div>
+
+              <span>
+                Meaningful days
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="about-copy reveal">
+
+            <div class="eyebrow">
+              About the App
+            </div>
+
+            <h2>
+              Built for the days
+              worth remembering.
+            </h2>
+
+            <p>
+              Maizbhandari Calendar was created to provide
+              a dedicated place for Maizbhandari special
+              occasions that may not appear in a standard
+              phone calendar.
+            </p>
+
+            <div class="check-list">
+
+              <div class="check-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Dedicated Maizbhandari event calendar
+                </span>
+
+              </div>
+
+              <div class="check-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Built-in Urosh and Khoshroj events
+                </span>
+
+              </div>
+
+              <div class="check-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Create and manage personal events
+                </span>
+
+              </div>
+
+              <div class="check-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Event reminders and notifications
+                </span>
+
+              </div>
+
+              <div class="check-item">
+
+                <span class="check">✓</span>
+
+                <span>
+                  Clean and accessible interface
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DOWNLOAD
+    ====================================================== -->
+
+    <section class="section download" id="download">
+
+      <div class="pattern"></div>
+
+      <div class="container">
+
+        <div class="download-content reveal">
+
+          <div class="eyebrow"
+               style="
+                 background:rgba(255,255,255,.12);
+                 color:white;
+               ">
+
+            Get Maizbhandari Calendar
+
+          </div>
+
+          <h2>
+            Keep your meaningful days close.
+          </h2>
+
+          <p>
+            Download Maizbhandari Calendar and keep
+            important occasions, special days and personal
+            events organized in one place.
+          </p>
+
+
+          <div class="store-buttons">
+
+            <!--
+              REPLACE THESE LINKS
+
+              Android:
+              Your Google Play Store URL
+
+              iOS:
+              Your Apple App Store URL
+            -->
+
+            <a
+              href="https://play.google.com/"
+              target="_blank"
+              rel="noopener"
+              class="store-button">
+
+              <span class="store-icon">
+                ▶
+              </span>
+
+              <span class="store-label">
+
+                <small>
+                  GET IT ON
+                </small>
+
+                <strong>
+                  Google Play
+                </strong>
+
+              </span>
+
+            </a>
+
+
+            <a
+              href="https://apps.apple.com/"
+              target="_blank"
+              rel="noopener"
+              class="store-button">
+
+              <span class="store-icon">
+                
+              </span>
+
+              <span class="store-label">
+
+                <small>
+                  DOWNLOAD ON THE
+                </small>
+
+                <strong>
+                  App Store
+                </strong>
+
+              </span>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+
+        <div class="footer-brand">
+
+          <a href="#home" class="brand">
+
+            <img
+              src="assets/icon.png"
+              alt="Maizbhandari Calendar"
+              class="brand-logo"
+            >
+
+            <span class="brand-text">
+
+              <span class="brand-name">
+                Maizbhandari Calendar
+              </span>
+
+              <span class="brand-company">
+                by Luxury Applications
+              </span>
+
+            </span>
+
+          </a>
+
+          <p class="footer-description">
+
+            A simple calendar experience for
+            Maizbhandari special days, important
+            occasions and personal events.
+
+          </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            App
+          </h4>
+
+          <a href="#features">
+            Features
+          </a>
+
+          <a href="#events">
+            Events
+          </a>
+
+          <a href="#screenshots">
+            Screenshots
+          </a>
+
+          <a href="#download">
+            Download
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            Information
+          </h4>
+
+          <a href="privacy.html">
+            Privacy Policy
+          </a>
+
+          <a href="#about">
+            About
+          </a>
+
+          <a href="mailto:contact@example.com">
+            Contact
+          </a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>
+            Developer
+          </h4>
+
+          <a href="#">
+            Luxury Applications
+          </a>
+
+          <a
+            href="https://maizbhandari-calendar.pages.dev/"
+            target="_blank"
+            rel="noopener">
+
+            Official Website
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © <span id="year"></span>
+          Luxury Applications. All rights reserved.
+        </span>
+
+        <span>
+          Made with care for the community.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* -------------------------------------------------------
+       MOBILE NAVIGATION
+    ------------------------------------------------------- */
+
+    const menuToggle =
+      document.getElementById("menuToggle");
+
+    const navLinks =
+      document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+
+      const isOpen =
+        navLinks.classList.toggle("active");
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        isOpen
+      );
+
+    });
+
+
+    /* Close mobile menu after clicking a link */
+
+    document
+      .querySelectorAll(".nav-links a")
+      .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+          navLinks.classList.remove("active");
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        });
+
+      });
+
+
+    /* -------------------------------------------------------
+       HEADER ON SCROLL
+    ------------------------------------------------------- */
+
+    const header =
+      document.getElementById("siteHeader");
+
+    function updateHeader() {
+
+      if (window.scrollY > 30) {
+
+        header.classList.add("scrolled");
+
+      } else {
+
+        header.classList.remove("scrolled");
+
+      }
+
+    }
+
+    window.addEventListener(
+      "scroll",
+      updateHeader,
+      { passive: true }
+    );
+
+    updateHeader();
+
+
+    /* -------------------------------------------------------
+       SCROLL REVEAL
+    ------------------------------------------------------- */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const revealObserver =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              revealObserver.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+
+    revealElements.forEach(element => {
+
+      revealObserver.observe(element);
+
+    });
+
+
+    /* -------------------------------------------------------
+       CURRENT YEAR
+    ------------------------------------------------------- */
+
+    document.getElementById("year")
+      .textContent = new Date().getFullYear();
+
+
+    /* -------------------------------------------------------
+       ESCAPE KEY CLOSES MOBILE MENU
+    ------------------------------------------------------- */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape" &&
+          navLinks.classList.contains("active")
+        ) {
+
+          navLinks.classList.remove("active");
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
