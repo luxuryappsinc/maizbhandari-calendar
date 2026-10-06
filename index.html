@@ -1021,93 +1021,102 @@
     }
 
     /* =========================================================
-       SCREENSHOTS
-    ========================================================= */
+   SCREENSHOTS
+========================================================= */
 
-    .screenshots {
-      background: white;
-    }
+.screenshots {
+  background: white;
+}
 
-    .screenshots-grid {
-      display: grid;
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  align-items: center;
+}
 
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+.screenshot {
+  position: relative;
+  background: #f1f6f2;
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
 
-      gap: 28px;
+  /* Continuous animation */
+  animation: screenshotFloat 4s ease-in-out infinite;
 
-      align-items: center;
-    }
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
 
-    .screenshot {
-      position: relative;
+/* Give each screenshot a slightly different timing */
+.screenshot:nth-child(1) {
+  animation-delay: 0s;
+}
 
-      background: #f1f6f2;
+.screenshot:nth-child(2) {
+  animation-delay: -1.2s;
+}
 
-      border: 1px solid var(--border);
+.screenshot:nth-child(3) {
+  animation-delay: -2.4s;
+}
 
-      border-radius: 30px;
+/* Hover effect */
+.screenshot:hover {
+  animation-play-state: paused;
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
 
-      padding: 12px;
+/* Continuous floating animation */
+@keyframes screenshotFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
 
-      box-shadow: var(--shadow);
+  50% {
+    transform: translateY(-12px);
+  }
+}
 
-      overflow: hidden;
+.screenshot img {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 22px;
+  background: #dfeae2;
+}
 
-      transition: transform .3s ease;
-    }
+.screenshot-placeholder {
+  aspect-ratio: 9 / 16;
 
-    .screenshot:hover {
-      transform: translateY(-9px);
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    .screenshot:nth-child(2) {
-      transform: translateY(-25px);
-    }
+  text-align: center;
 
-    .screenshot:nth-child(2):hover {
-      transform: translateY(-34px);
-    }
+  border-radius: 22px;
 
-    .screenshot img {
-      width: 100%;
+  background:
+    linear-gradient(
+      160deg,
+      #eff9f2,
+      #ffffff
+    );
 
-      aspect-ratio: 9 / 16;
+  color: var(--muted);
+}
 
-      object-fit: cover;
-
-      border-radius: 22px;
-
-      background: #dfeae2;
-    }
-
-    .screenshot-placeholder {
-      aspect-ratio: 9 / 16;
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      border-radius: 22px;
-
-      background:
-        linear-gradient(
-          160deg,
-          #eff9f2,
-          #ffffff
-        );
-
-      color: var(--muted);
-    }
-
-    .screenshot-placeholder strong {
-      color: var(--primary);
-      margin-bottom: 5px;
-    }
+.screenshot-placeholder strong {
+  color: var(--primary);
+  margin-bottom: 5px;
+}
 
     /* =========================================================
        ABOUT
