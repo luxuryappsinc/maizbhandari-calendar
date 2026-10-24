@@ -880,5 +880,115 @@
     "repeat": "Yearly",
     "reminder": "At time of event",
     "image": ""
+  },
+  {
+    "id": "64",
+    "title": "ঈদ-এ-গাদীর-ই-খুম",
+    "type": "islamic",
+    "hijriMonth": 12,
+    "hijriDay": 18,
+    "hijriDurationDays": 3,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "65",
+    "title": "আশুরা শরীফ ও শাহাদাত-এ-ইমাম হুসাইন (আঃ)",
+    "type": "islamic",
+    "hijriMonth": 1,
+    "hijriDay": 10,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "66",
+    "title": "শাহাদাত-এ-ইমাম হাসান (আঃ) — ৭ সফর",
+    "type": "islamic",
+    "hijriMonth": 2,
+    "hijriDay": 7,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "67",
+    "title": "শাহাদাত-এ-ইমাম হাসান (আঃ) — ২৮ সফর",
+    "type": "islamic",
+    "hijriMonth": 2,
+    "hijriDay": 28,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "68",
+    "title": "শাহাদাত-এ-হযরত ফাতিমা যাহরা (সাঃ আঃ) — প্রথম ফাতিমিয়া",
+    "type": "islamic",
+    "hijriMonth": 5,
+    "hijriDay": 13,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "69",
+    "title": "শাহাদাত-এ-হযরত ফাতিমা যাহরা (সাঃ আঃ) — দ্বিতীয় ফাতিমিয়া",
+    "type": "islamic",
+    "hijriMonth": 6,
+    "hijriDay": 3,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "70",
+    "title": "শাহাদাত-এ-মাওলা আলী (আঃ)",
+    "type": "islamic",
+    "hijriMonth": 9,
+    "hijriDay": 21,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "71",
+    "title": "ঈদ-এ-মীলাদুন্নবী ﷺ — ১২ রবিউল আউয়াল",
+    "type": "islamic",
+    "hijriMonth": 3,
+    "hijriDay": 12,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "72",
+    "title": "ঈদ-এ-মীলাদুন্নবী ﷺ — ১৭ রবিউল আউয়াল",
+    "type": "islamic",
+    "hijriMonth": 3,
+    "hijriDay": 17,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "73",
+    "title": "ওফাত-এ-রাসূলুল্লাহ ﷺ — ২৮ সফর",
+    "type": "islamic",
+    "hijriMonth": 2,
+    "hijriDay": 28,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
+  },
+  {
+    "id": "74",
+    "title": "ওফাত-এ-রাসূলুল্লাহ ﷺ — ১২ রবিউল আউয়াল",
+    "type": "islamic",
+    "hijriMonth": 3,
+    "hijriDay": 12,
+    "hijriDurationDays": 1,
+    "hijriAdjustDays": 0,
+    "allDay": true
   }
 ]
