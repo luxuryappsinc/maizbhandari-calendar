@@ -889,7 +889,8 @@
     "hijriDay": 18,
     "hijriDurationDays": 3,
     "hijriAdjustDays": 0,
-    "allDay": true
+    "allDay": true,
+    "image": "https://maizbhandari-calendar.pages.dev/images/eid_e_gadeer_e_khum.png"
   },
   {
     "id": "65",
@@ -899,7 +900,8 @@
     "hijriDay": 10,
     "hijriDurationDays": 1,
     "hijriAdjustDays": 0,
-    "allDay": true
+    "allDay": true,
+    "image": "https://maizbhandari-calendar.pages.dev/images/imam_hussain(a)_shrine.png"
   },
   {
     "id": "66",
@@ -909,7 +911,8 @@
     "hijriDay": 28,
     "hijriDurationDays": 1,
     "hijriAdjustDays": 0,
-    "allDay": true
+    "allDay": true,
+    "image": "https://maizbhandari-calendar.pages.dev/images/imam_ali(a)_mosque.png"
   },
   {
     "id": "67",
@@ -919,7 +922,8 @@
     "hijriDay": 3,
     "hijriDurationDays": 1,
     "hijriAdjustDays": 0,
-    "allDay": true
+    "allDay": true,
+    "image": "https://maizbhandari-calendar.pages.dev/images/ma_fatima_tuz_zahra(a)_tomb.png"
   },
   {
     "id": "68",
@@ -929,7 +933,8 @@
     "hijriDay": 21,
     "hijriDurationDays": 1,
     "hijriAdjustDays": 0,
-    "allDay": true
+    "allDay": true,
+    "image": "https://maizbhandari-calendar.pages.dev/images/imam_ali(a)_mosque.png"
   },
   {
     "id": "69",
@@ -939,6 +944,7 @@
     "hijriDay": 12,
     "hijriDurationDays": 1,
     "hijriAdjustDays": 0,
-    "allDay": true
+    "allDay": true,
+    "image": "https://maizbhandari-calendar.pages.dev/images/eid_e_gadeer_e_khum.png"
   }
 ]
